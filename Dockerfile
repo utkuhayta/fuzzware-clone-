@@ -48,6 +48,7 @@ COPY --chown=user emulator/unicorn/ $FUZZWARE/emulator/unicorn
 WORKDIR $FUZZWARE/emulator
 USER user
 RUN ./get_afl.sh && \
+    AFL_NO_X86=1 \
     UNICORN_QEMU_FLAGS="--python=/usr/bin/python3" make -C $FUZZWARE/emulator/afl clean all && \
     make -C $FUZZWARE/emulator/AFLplusplus clean all && \
     cd $FUZZWARE/emulator/unicorn && \
